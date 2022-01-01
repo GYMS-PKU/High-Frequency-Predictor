@@ -150,4 +150,4 @@ class AutoFormula:
         if type(formula) == str:
             formula = self.formula_parser.parse(formula)
         signal = self.cal_formula(formula, data.data_dic)  # 暂时为了方便，无论如何都计算整个回测区间的因子值
-        return self.auto_tester.test(signal[start:end], data.ret[start:end]), signal
+        return self.auto_tester.test(signal[start:end], data.ret[start:end], start=start, end=end), signal

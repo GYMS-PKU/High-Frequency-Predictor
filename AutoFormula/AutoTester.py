@@ -1,13 +1,12 @@
-# Copyright (c) 2021 Dai HBG
+# Copyright (c) 2022 Dai HBG
 
 """
 AutoTester
 该模块用于测试信号对于高频价差的线性预测力
 
 日志
-2021-12-19
-- 初始化
-
+2022-01-01
+- init
 """
 
 import numpy as np
@@ -33,41 +32,21 @@ class AutoTester:
         pass
 
     @staticmethod
-    def test(signal: np.array, spread: np.array, top: np.array = None, method: str = 'cs',
-             corr_type: str = 'linear') -> Stats:
+    def test(signal: np.array, ret: np.array, start: int = 100, end: int = 4600) -> Stats:
         """
         :param signal: 信号矩阵
-        :param spread 和信号矩阵形状一致的高频收益率矩阵
-        :param top: 每个时间截面上进入截面的股票位置
-        :param method: 计算方式
-        :param corr_type: linear或者log
+        :param ret: 收益率矩阵
+        :param start: 开始时间
+        :param end: 结束时间
         :return:
         """
         signal[np.isnan(signal)] = 0
-        if top is None:
-            top = (signal != 0) & (~np.isnan(signal)) & (~np.isinf(signal)) & (~np.isnan(spread))
+        ret[np.isnan(ret)] = 0
 
-        if method == 'cs':  # 截面相关系数
-            corr = np.zeros(spread.shape[0])
-            for i in range(spread.shape[0]):
-                se = ~np.isnan(spread[i])
-                if corr_type == 'linear':
-                    corr[i] = np.corrcoef(spread[i][se], signal[i][se])[0, 1]
-                elif corr_type == 'log':
-                    corr[i] = np.corrcoef(np.log(spread[i][se]), signal[i][se])[0, 1]
-            mean_corr = np.nanmean(corr)
-            corr_IR = mean_corr / np.nanstd(corr)
-            positive_corr_ratio = np.sum(corr > 0) / np.sum(~np.isnan(corr))
-            return Stats(corr=corr, mean_corr=mean_corr, corr_IR=corr_IR, positive_corr_ratio=positive_corr_ratio)
-        elif method == 'ts':  # 时序相关系数
-            corr = np.zeros(spread.shape[1])
-            for i in range(spread.shape[1]):
-                se = ~np.isnan(spread[:, i])
-                if corr_type == 'linear':
-                    corr[i] = np.corrcoef(spread[:, i][se], signal[:, i][se])[0, 1]
-                else:
-                    corr[i] = np.corrcoef(np.log(spread[:, i][se]), signal[:, i][se])[0, 1]
-            mean_corr = np.nanmean(corr)
-            corr_IR = mean_corr / np.nanstd(corr)
-            positive_corr_ratio = np.sum(corr > 0) / np.sum(~np.isnan(corr))
-            return Stats(corr=corr, mean_corr=mean_corr, corr_IR=corr_IR, positive_corr_ratio=positive_corr_ratio)
+        corr = np.zeros(signal.shape[1])
+        for i in range(signal.shape[1]):
+            corr[i] = np.corrcoef(ret[:, i], signal[:, i])[0, 1]
+        mean_corr = np.nanmean(corr)
+        corr_IR = mean_corr / np.nanstd(corr)
+        positive_corr_ratio = np.sum(corr > 0) / np.sum(~np.isnan(corr))
+        return Stats(corr=corr, mean_corr=mean_corr, corr_IR=corr_IR, positive_corr_ratio=positive_corr_ratio)
