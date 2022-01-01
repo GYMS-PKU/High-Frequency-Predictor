@@ -32,12 +32,13 @@ class AutoTester:
         pass
 
     @staticmethod
-    def test(signal: np.array, ret: np.array, start: int = 100, end: int = 4600) -> Stats:
+    def test(signal: np.array, ret: np.array, start: int = 100, end: int = 4600, shift: int = 1) -> Stats:
         """
         :param signal: 信号矩阵
         :param ret: 收益率矩阵
         :param start: 开始时间
         :param end: 结束时间
+        :param shift: 预测平移量
         :return:
         """
         signal[np.isnan(signal)] = 0
@@ -45,7 +46,7 @@ class AutoTester:
 
         corr = np.zeros(signal.shape[1])
         for i in range(signal.shape[1]):
-            corr[i] = np.corrcoef(ret[:, i], signal[:, i])[0, 1]
+            corr[i] = np.corrcoef(ret[start+shift:end+shift, i], signal[start:end, i])[0, 1]
         mean_corr = np.nanmean(corr)
         corr_IR = mean_corr / np.nanstd(corr)
         positive_corr_ratio = np.sum(corr > 0) / np.sum(~np.isnan(corr))

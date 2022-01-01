@@ -47,22 +47,11 @@ class DataLoader:
             stock_list = stock_list[:stock_num]
         datas = {}
 
-        names = ['BidSize1', 'BidSize2', 'BidSize3', 'BidSize4', 'BidSize5', 'BidSize6', 'BidSize7',
-                 'BidSize8', 'BidSize9', 'BidSize10', 'BidPX1', 'BidPX2', 'BidPX3', 'BidPX4', 'BidPX5',
-                 'BidPX6', 'BidPX7', 'BidPX8', 'BidPX9', 'BidPX10', 'OfferSize1', 'OfferSize2', 'OfferSize3',
-                 'OfferSize4', 'OfferSize5', 'OfferSize6', 'OfferSize7', 'OfferSize8', 'OfferSize9', 'OfferSize10',
-                 'OfferPX1', 'OfferPX2', 'OfferPX3', 'OfferPX4', 'OfferPX5', 'OfferPX6', 'OfferPX7', 'OfferPX8',
-                 'OfferPX9', 'OfferPX10', 'mid_price', 'bid_side_depth_qty', 'offer_side_depth_qty', 'BidVol1',
-                 'OfferVol1', 'BidVol2', 'OfferVol2', 'BidVol3', 'OfferVol3', 'BidVol4', 'OfferVol4', 'BidVol5',
-                 'OfferVol5', 'BidVol6', 'OfferVol6', 'BidVol7', 'OfferVol7', 'BidVol8', 'OfferVol8', 'BidVol9',
-                 'OfferVol9', 'BidVol10', 'OfferVol10', 'bid_side_depth_vol', 'offer_side_depth_vol', 'quote_spread',
-                 'relative_quote_spread', 'wavg_spread_5', 'relative_wavg_spread_5', 'wavg_spread_10',
-                 'relative_wavg_spread_10', 'wavg_spread_20', 'relative_wavg_spread_20', 'wavg_spread_30',
-                 'relative_wavg_spread_30', 'wavg_spread_50', 'relative_wavg_spread_50', 'wavg_spread_75',
-                 'relative_wavg_spread_75', 'wavg_spread_100', 'relative_wavg_spread_100', 'wavg_spread_200',
-                 'relative_wavg_spread_200', 'wavg_spread_300', 'relative_wavg_spread_300', 'wavg_spread_400',
-                 'relative_wavg_spread_400', 'wavg_spread_500', 'relative_wavg_spread_500', 'OrderCount', 'OrderQty',
-                 'OrderVol', 'TradeCount', 'TradeQty', 'TradeVol']
+        names = ['BidSize1', 'BidSize2', 'BidSize3', 'BidSize4', 'BidSize5',
+                 'BidPX1', 'BidPX2', 'BidPX3', 'BidPX4', 'BidPX5',
+                 'OfferSize1', 'OfferSize2', 'OfferSize3', 'OfferSize4', 'OfferSize5',
+                 'OfferPX1', 'OfferPX2', 'OfferPX3', 'OfferPX4', 'OfferPX5',
+                 'mid_price', 'OrderCount', 'TradeCount', 'ret']
         for stock in stock_list:
             stock_data = {name: [] for name in names}  # 最终得到一个snapshot_num * days的矩阵，逻辑是每日可以看成是独立样本
             ret = []

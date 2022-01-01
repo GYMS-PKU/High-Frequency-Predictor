@@ -36,17 +36,18 @@ class HFP:
         self.auto_formula = {key: AutoFormula(value) for key, value in self.datas.items()}
 
     def test_factor(self, formula: str, verbose: bool = True, start: int = 100,
-                    end: int = 4600) -> dict:
+                    end: int = 4600, shift: int = 1) -> dict:
         """
         :param formula: 需要测试的因子表达式，如果是字符串形式，需要先解析成树
         :param verbose: 是否打印结果
         :param: start: 每日测试开始的snap
         :param: end: 每日测试结束的snap
+        :param: shift: 预测平移量
         :return: 返回统计值以及该因子产生的信号矩阵的字典
         """
         to_return = {}
         for key, value in self.datas.items():
-            stats, signal = self.auto_formula[key].test_formula(formula, value, start=start, end=end)
+            stats, signal = self.auto_formula[key].test_formula(formula, value, start=start, end=end, shift=shift)
             to_return[key] = (stats, signal)
             if verbose:
                 print('{} mean corr: {:.4f}, positive_corr_ratio: {:.4f}, corr_IR: {:.4f}'.

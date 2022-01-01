@@ -139,15 +139,16 @@ class AutoFormula:
                            self.cal_formula(tree.right, data_dic, return_type) + '}'
 
     def test_formula(self, formula: str, data: Data, start: int = 100,
-                     end: int = 4600) -> (Stats, np.array):
+                     end: int = 4600, shift: int = 1) -> (Stats, np.array):
         """
         :param formula: 需要测试的因子表达式，如果是字符串形式，需要先解析成树
         :param data: Data类
         :param: start: 每日测试开始的snap
         :param: end: 每日测试结束的snap
+        :param: shift: 预测平移量
         :return: 返回统计值以及该因子产生的信号矩阵
         """
         if type(formula) == str:
             formula = self.formula_parser.parse(formula)
         signal = self.cal_formula(formula, data.data_dic)  # 暂时为了方便，无论如何都计算整个回测区间的因子值
-        return self.auto_tester.test(signal[start:end], data.ret[start:end], start=start, end=end), signal
+        return self.auto_tester.test(signal, data.ret, start=start, end=end, shift=shift), signal
