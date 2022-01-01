@@ -64,7 +64,7 @@ class DataLoader:
                  'relative_wavg_spread_400', 'wavg_spread_500', 'relative_wavg_spread_500', 'OrderCount', 'OrderQty',
                  'OrderVol', 'TradeCount', 'TradeQty', 'TradeVol']
         for stock in stock_list:
-            stock_data = {name: [] for name in names}  # 最终得到一个days * snapshot_num的矩阵
+            stock_data = {name: [] for name in names}  # 最终得到一个snapshot_num * days的矩阵，逻辑是每日可以看成是独立样本
             ret = []
             years = os.listdir('{}/data/{}'.format(self.data_path, stock))
             for year in years:
@@ -74,8 +74,8 @@ class DataLoader:
                     ret.append(snapshot['ret'])  # 3s收益率
                     for name in names:
                         stock_data[name].append(snapshot[name].values)
-            ret = np.vstack(ret)
+            ret = np.vstack(ret).T
             for name in names:
-                stock_data[name] = np.vstack(stock_data[name])
+                stock_data[name] = np.vstack(stock_data[name]).T
             datas[stock] = Data(data_dic=stock_data, ret=ret)
         return datas

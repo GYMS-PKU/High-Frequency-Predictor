@@ -36,8 +36,8 @@ FormulaTree类定义了公式树变异的方法
 import numpy as np
 import sys
 
-sys.path.append('C:/Users/Administrator/Desktop/Repositories/Low-Frequency-Spread-Estimator/mytools/AutoFormula')
-sys.path.append('C:/Users/Handsome Bad Guy/Desktop/Repositories/Low-Frequency-Spread-Estimator/mytools/AutoFormula')
+sys.path.append('C:/Users/Administrator/Desktop/Repositories/High-Frequency-Predictor/AutoFormula')
+sys.path.append('C:/Users/HBG/Desktop/Repositories/High-Frequency-Predictor/AutoFormula')
 from op_dic import *
 from FormulaParser import Node, FormulaParser
 

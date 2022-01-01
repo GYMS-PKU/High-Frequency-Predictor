@@ -30,7 +30,7 @@ class HFP:
         dl = DataLoader(data_path=data_path, back_test_data_path=back_test_data_path)
         self.datas = dl.load()
         self.tester = AutoTester()
-        self.autoformula = {key: AutoFormula(value) for key, value in self.datas.items()}
+        self.auto_formula = {key: AutoFormula(value) for key, value in self.datas.items()}
 
     def test_factor(self, formula: str, verbose: bool = True, start: int = 100,
                     end: int = 4600) -> dict:
@@ -43,7 +43,7 @@ class HFP:
         """
         to_return = {}
         for key, value in self.datas.items():
-            stats, signal = self.autoformula[key].test_formula(formula, value, start=start, end=end)
+            stats, signal = self.auto_formula[key].test_formula(formula, value, start=start, end=end)
             to_return[key] = (stats, signal)
             if verbose:
                 print('{} mean corr: {:.4f}, positive_corr_ratio: {:.4f}, corr_IR: {:.4f}'.
