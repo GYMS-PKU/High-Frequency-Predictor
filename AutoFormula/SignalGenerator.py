@@ -32,8 +32,9 @@ import numpy as np
 import sys
 sys.path.append('C:/Users/Administrator/Desktop/Repositories/Low-Frequency-Spread-Estimator'
                 '/mytools/AutoFormula/operations')
-sys.path.append('C:/Users/Handsome Bad Guy/Desktop/Repositories/Low-Frequency-Spread-Estimator'
+sys.path.append('C:/Users/HBG/Desktop/Repositories/Low-Frequency-Spread-Estimator'
                 '/mytools/AutoFormula/operations')
+sys.path.append('../operations')
 from one import *
 from one_num import *
 from one_num_num import *

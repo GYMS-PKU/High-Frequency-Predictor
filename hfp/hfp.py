@@ -20,15 +20,18 @@ from AutoFormula.AutoFormula import AutoFormula
 
 class HFP:
     def __init__(self, data_path: str = 'D:/Documents/学习资料/HFData',
-                 back_test_data_path: str = 'D:/Documents/AutoFactoryData/BackTestData'):
+                 back_test_data_path: str = 'D:/Documents/AutoFactoryData/BackTestData',
+                 stock_num: int = 1, stock_list = None):
         """
         :param data_path: 存放数据的路径
         :param back_test_data_path: 回测数据的存放路径
+        :param stock_num: 测试股票数量
+        :param stock_list: 测试股票列表
         """
         self.data_path = data_path
         self.back_test_data_path = back_test_data_path
         dl = DataLoader(data_path=data_path, back_test_data_path=back_test_data_path)
-        self.datas = dl.load()
+        self.datas = dl.load(stock_num=stock_num, stock_list=stock_list)
         self.tester = AutoTester()
         self.auto_formula = {key: AutoFormula(value) for key, value in self.datas.items()}
 
