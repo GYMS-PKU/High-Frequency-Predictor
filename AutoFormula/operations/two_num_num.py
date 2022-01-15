@@ -70,7 +70,7 @@ def bitsquantile(a, b, delay, num):  # 时序分位数算子，num是一个介�
     return s
 
 
-def bitsquantileupmean(a, delay, num):  # 时序分位数平均算子，num是一个介于0到1之间的数字，这个算子只接受二维输入
+def bitsquantileupmean(a, b, delay, num):  # 时序分位数平均算子，num是一个介于0到1之间的数字，这个算子只接受二维输入
     s = np.zeros(a.shape)  # 返回该排位之上的所有的值的平均
     tmp_a = np.zeros((delay, a.shape[0], a.shape[1]))
     tmp_a[0] = a.copy()
