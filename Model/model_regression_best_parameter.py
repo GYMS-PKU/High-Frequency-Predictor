@@ -97,13 +97,13 @@ class model_regression_best_parameters():
     def train_model(self):
         
         if self.model_type == 'LSTM':
-            model = LSTM_model(**self.para1)
+            model = LSTM_model(**self.para1,device = self.device)
         elif self.model_type == 'stacked_LSTM':
-            model = LSTM_stacked_model(**self.para1)
+            model = LSTM_stacked_model(**self.para1,device = self.device)
         elif self.model_type == 'MLP':
-            model = MLP_model(**self.para1)
+            model = MLP_model(**self.para1,device = self.device)
         elif self.model_type == 'LSTM-MLP':
-            model = LSTM_MLP_model(**self.para1)
+            model = LSTM_MLP_model(**self.para1,device = self.device)
         elif self.model_type == 'CNN-LSTM':
             model = CNN_LSTM_model(**self.para1,device = self.device)
         model.to(self.device)

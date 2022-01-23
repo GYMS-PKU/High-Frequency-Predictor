@@ -114,6 +114,7 @@ class model_optuna():
             'num_layers':2,
             'input_size':40,
             'hidden_size':trial.suggest_int('hidden_size', 60, 300),
+                'device': self.device,
                 }
         elif self.model_type == 'stacked_LSTM':
             params1 = {
@@ -122,6 +123,7 @@ class model_optuna():
             'hidden_size_s_1': trial.suggest_int('hidden_size_s_1', 50, 150),
             'hidden_size_s_2': trial.suggest_int('hidden_size_s_2', 100, 300),
             'hidden_size_s_3': trial.suggest_int('hidden_size_s_3', 200, 400),
+                'device': self.device,
                 }
         elif self.model_type == 'MLP':
             params1 = {
@@ -129,6 +131,7 @@ class model_optuna():
             'layer1':trial.suggest_int('layer1', 100, 800),
             'layer2':trial.suggest_int('layer2', 50, 150),
             'layer3':trial.suggest_int('layer3', 10, 60),
+                'device': self.device,
                 }
         elif self.model_type == 'LSTM-MLP':
             params1 = {
@@ -136,9 +139,10 @@ class model_optuna():
             'input_size':40,
             'hidden_size':trial.suggest_int('hidden_size', 80, 200),
             'fc_size':trial.suggest_int('fc_size', 10, 50),
+                'device': self.device,
                 }            
         params2 = {
-        'lr':trial.suggest_loguniform('lr', 1e-5, 0.1),
+        'lr':trial.suggest_loguniform('lr', 1e-9, 0.1),
            }
         return self.model_optuna_best(params1,params2)
 
