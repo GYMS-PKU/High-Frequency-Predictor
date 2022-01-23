@@ -21,7 +21,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-class test_regression_0():
+class test_classification_0():
     def __init__(self, model_type, feature_name, future_time,data_train_loader,data_val_loader,data_test_loader):
         super().__init__()
         self.model_type = model_type
