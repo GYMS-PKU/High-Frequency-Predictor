@@ -12,8 +12,9 @@ FormulaParser用于解析字符串公式，Node定义了公式树节点
 
 
 import sys
-sys.path.append('.')
-from op_dic import *
+sys.path.append('C:/Users/Administrator/Desktop/Repositories/High-Frequency-Predictor')
+sys.path.append('C:/Users/HBG/Desktop/Repositories/High-Frequency-Predictor')
+from AutoFormula.op_dic import *
 
 
 class Node:

@@ -7,6 +7,8 @@
 日志
 2022-01-01
 - init
+2022-01-24
+- 替换算子为Cython版本
 """
 
 
@@ -15,7 +17,7 @@ import sys
 sys.path.append('C:/Users/Administrator/Desktop/Repositories/High-Frequency-Predictor')
 from DataLoader.DataLoader import DataLoader
 from AutoFormula.AutoTester import AutoTester, Stats
-from AutoFormula.AutoFormula import AutoFormula
+from AutoFormula.AutoFormula_cy import AutoFormula_cy
 
 
 class HFP:
@@ -33,7 +35,7 @@ class HFP:
         dl = DataLoader(data_path=data_path, back_test_data_path=back_test_data_path)
         self.datas = dl.load(stock_num=stock_num, stock_list=stock_list)
         self.tester = AutoTester()
-        self.auto_formula = {key: AutoFormula(value) for key, value in self.datas.items()}
+        self.auto_formula = {key: AutoFormula_cy(value) for key, value in self.datas.items()}
 
     def test_factor(self, formula: str, verbose: bool = True, start: int = 100,
                     end: int = 4600, shift: int = 1) -> dict:

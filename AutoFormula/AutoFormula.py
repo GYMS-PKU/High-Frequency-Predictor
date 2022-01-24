@@ -3,11 +3,6 @@
 """
 AutoFormula
 该模块定义调用FormulaTree进行解析公式以及测试
-当前版本不提供自动特征搜寻的功能
-
-日志
-2022-01-01
-- init
 """
 
 import numpy as np
